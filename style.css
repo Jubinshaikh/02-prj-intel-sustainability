@@ -1,7 +1,8 @@
 /* Basic page reset for cleaner spacing */
 body {
 	margin: 0;
-	font-family: Arial, sans-serif;
+	font-family: "Inter", Arial, sans-serif;
+	font-weight: 400;
 	background-color: #e8f3ff;
 }
 
@@ -23,11 +24,21 @@ header img {
 	height: auto;
 	display: block;
 	margin: 0 auto 16px auto;
+	transition: transform 0.3s ease-out, filter 0.3s ease-out;
+}
+
+header img:hover {
+	transform: scale(1.05);
+	filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.2));
 }
 
 /* Main title below the logo */
 header h1 {
 	margin: 0 0 12px 0;
+	font-size: clamp(28px, 3vw, 44px);
+	font-weight: 800;
+	letter-spacing: -0.6px;
+	line-height: 1.1;
 	color: #ffffff;
 }
 
@@ -35,6 +46,110 @@ header h1 {
 header p {
 	max-width: 700px;
 	margin: 0 auto;
-	line-height: 1.5;
+	font-size: clamp(14px, 1.2vw, 18px);
+	font-weight: 400;
+	line-height: 1.6;
 	color: #ffffff;
+}
+
+/* Timeline section: cards are arranged in one horizontal row */
+section {
+	display: flex;
+	gap: 20px;
+	padding: 24px 20px;
+	overflow-x: auto;
+	overflow-y: visible;
+	scroll-snap-type: x mandatory;
+}
+
+/* Each timeline card */
+section div {
+	background-color: #ffffff;
+	border-radius: 10px;
+	padding: 16px;
+	box-sizing: border-box;
+	flex: 0 0 calc((100% - 60px) / 4);
+	scroll-snap-align: start;
+	position: relative;
+	overflow: hidden;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section div:hover {
+	transform: translateY(-6px) scale(1.01);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Card image styling */
+section div img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	border-radius: 8px;
+	margin-bottom: 12px;
+}
+
+/* Card text spacing */
+section div h2 {
+	margin: 0 0 6px 0;
+	font-size: 22px;
+	font-weight: 700;
+	letter-spacing: -0.2px;
+	color: #0068b5;
+}
+
+section div h3 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+section div p {
+	margin: 0;
+	padding: 10px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.55;
+	background-color: rgba(255, 255, 255, 0.95);
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+	position: absolute;
+	left: 16px;
+	right: 16px;
+	bottom: 16px;
+	opacity: 0;
+	transform: translateY(10px);
+	pointer-events: none;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	z-index: 2;
+}
+
+/* Show description when user hovers over a card */
+section div:hover p {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Responsive layout: on small screens, stack cards vertically */
+@media (max-width: 768px) {
+	section {
+		flex-direction: column;
+		overflow-x: visible;
+		scroll-snap-type: none;
+	}
+
+	section div {
+		flex: 1 1 auto;
+		width: 100%;
+	}
+}
+
+/* Bottom helper text */
+body > p {
+	text-align: center;
+	padding: 0 20px 24px 20px;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 500;
 }
